@@ -5,6 +5,22 @@ models for use with [llama.cpp](https://github.com/ggml-org/llama.cpp). Each mod
 in its own subfolder and is downloaded on demand. `models-preset.ini` holds the
 llama-server configuration that references each model's `model.gguf`.
 
+## Running llama.cpp in router mode
+
+In llama.cpp, router mode allows you to launch a single llama-server instance that dynamically hosts, loads, and unloads multiple LLMs on demand (similar to how Ollama manages models). To trigger router mode, you must omit the standard single-model flags (--model or -m) and instead pass the --models-dir flag to point to your local GGUF directory.
+
+To serve these models, point llama.cpp at this directory and its preset file:
+
+- `--models-dir` — the directory this project lives in (the folder containing the model
+  subfolders and this `README.md`).
+- `--models-preset` — the `models-preset.ini` file within this project.
+
+```bash
+llama-server \
+  --models-dir ${HOME}/models \
+  --models-preset ${HOME}/models/models-preset.ini
+```
+
 ## Folder structure
 
 ```
